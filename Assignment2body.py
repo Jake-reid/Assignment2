@@ -8,7 +8,6 @@ Displays a menu and adds a button for each item in the csv to the GUI
 Through the menu the user can veiw an items description, hire / return or add an item
 Multiple items can be hired or returned at the same time
 Any changes made will only save to the file on exiting the programme
-
 """
 
 from kivy.app import App
