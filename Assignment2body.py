@@ -1,20 +1,14 @@
 """
 Items for hire GUI -- Jake Reid-Williams
 27/05/2016
+https://github.com/Jake-reid/Assignment2
 
 This program fetches a series of items(with name, description, cost and availability)
-Displays a menu and add a button for each item  to the GUI
+Displays a menu and adds a button for each item in the csv to the GUI
 Through the menu the user can veiw an items description, hire / return or add an item
 Multiple items can be hired or returned at the same time
 Any changes made will only save to the file on exiting the programme
 
-
-
-
-Code contains inline comments where helpful,
-and meaningful function docstrings and top
-docstring containing program details (name,
-date, basic description, GitHub URL).
 """
 
 from kivy.app import App
@@ -22,7 +16,9 @@ from kivy.lang import Builder
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
 from Item import Items #didnt manage to get the Items working
-from Assignment1 import read_write_csv
+import Itemslist
+# from Assignment1 import read_write_csv  importing this made the program run the entire assignment 1, so i re defined it here
+from Asgn1 import read_write_csv
 import csv
 
 
@@ -37,6 +33,7 @@ class ItemListAPP(App):
         """
         self.saveList = read_write_csv('r',[])
 
+
         self.totalCost=0.0
         self.changeList=[]
         self.instanceList = []
@@ -45,8 +42,8 @@ class ItemListAPP(App):
         super(ItemListAPP, self).__init__(**kwargs)
 
         for i in range(0, len(self.saveList)):
-            self.itemList[self.saveList[i][0]]= self.saveList[i][1:]  
-
+            self.itemList[self.saveList[i][0]]= self.saveList[i][1:]
+           # Itemslist(Items(self.saveList[0], self.saveList[1], self.saveList[2], self.saveList[3]))
     infoBar = StringProperty()
     def build(self):
         """
@@ -62,7 +59,6 @@ class ItemListAPP(App):
         """
         Save using the read/write function from Assignment 1 and Quit
         """
-        print(self.saveList)
         read_write_csv('w', self.saveList)
         ItemListAPP.stop(self)
 

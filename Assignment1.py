@@ -2,6 +2,18 @@
 
 print ('Items for hire - Jake Reid-Williams')
 # Welcome message
+def read_write_csv(readwrite, list):
+    with open('C:\Python34\items.csv', readwrite, newline='') as csvfile:
+
+        if readwrite == 'r':
+            useCSV = csv.reader(csvfile, delimiter=',')
+            dataLines = [line for line in useCSV]
+            return dataLines
+        if readwrite == 'w':
+            useCSV = csv.writer(csvfile, delimiter=',')
+            useCSV.writerows(list)
+            return
+
 
 def display_item (rowinfo, rownumber):
     descsize = rowinfo[0] + rowinfo[1]
@@ -29,16 +41,7 @@ row_info = []
 MenuChoice = ''
 writelist = []
 writedict = {}
-def read_write_csv(readwrite, list):
-    with open('C:\Python34\items.csv', readwrite, newline='') as csvfile:
 
-        if readwrite == 'r':
-            useCSV = csv.reader(csvfile, delimiter=',')
-            dataLines = [line for line in useCSV]
-            return dataLines
-        if readwrite == 'w':
-            useCSV = csv.writer(csvfile, delimiter=',')
-            useCSV.writerows(list)
 
 dataLines = read_write_csv('r',[])
 while MenuChoice != 'q':
