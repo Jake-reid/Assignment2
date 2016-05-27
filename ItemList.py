@@ -19,10 +19,10 @@ date, basic description, GitHub URL).
 
 from kivy.app import App
 from kivy.lang import Builder
-
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
-from Item import Items
+from Item import Items #didnt manage to get the Items working
+from Assignment1 import read_write_csv
 import csv
 
 
@@ -33,11 +33,9 @@ class ItemListAPP(App):
 
     def __init__(self, **kwargs):
         """
-        Initialize the main app and read from the csv
+        Initialize the main app and read from the csv using a function from the previous assignment
         """
-        with open('C:\Python34\items.csv', newline='') as csvfile:
-            ReadCSV = csv.reader(csvfile, delimiter=',')
-            self.saveList = [line for line in ReadCSV]
+        self.saveList = read_write_csv('r',[])
 
         self.totalCost=0.0
         self.changeList=[]
@@ -47,7 +45,7 @@ class ItemListAPP(App):
         super(ItemListAPP, self).__init__(**kwargs)
 
         for i in range(0, len(self.saveList)):
-            self.itemList[self.saveList[i][0]]= self.saveList[i][1:]
+            self.itemList[self.saveList[i][0]]= self.saveList[i][1:]  
 
     infoBar = StringProperty()
     def build(self):
@@ -57,17 +55,15 @@ class ItemListAPP(App):
         self.title = "Items for Hire - Jake Reid"
         self.root = Builder.load_file('ItemListGUI.kv')
         self.create_item_buttons()
-        self.root.ids.listMenu.state = 'down'
+        self.root.ids.listMenu.state = 'down' #starts the program set to list items
         return self.root
 
     def click_Quit(self):
         """
-        Save and Quit
+        Save using the read/write function from Assignment 1 and Quit
         """
         print(self.saveList)
-        with open('C:\Python34\items.csv', 'w', newline='') as csvfile:
-            writeCSV = csv.writer(csvfile, delimiter=',')
-            writeCSV.writerows(self.saveList)
+        read_write_csv('w', self.saveList)
         ItemListAPP.stop(self)
 
     def click_Menu(self, menu):
